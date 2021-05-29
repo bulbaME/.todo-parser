@@ -17,6 +17,7 @@ syntax is a bit symilar to the task lists from .md
 `[!]` - unactive task
 
 # EXAMPLE
+.todo file:
 ```
 [ ] main task (active)
 	[ ] sub task 1 (active)
@@ -28,3 +29,4 @@ syntax is a bit symilar to the task lists from .md
 	[?] sub task 4 (planning)
 	[!] sub task 5 (hidden)
 ```
+command line: `py parser.py <filename>`

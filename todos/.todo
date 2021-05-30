@@ -1,0 +1,31 @@
+SPECIFICAIONS
+
+[/] main task 
+    [ ] sub task 1 
+    [ ] sub task 2 
+        [ ] sub sub task 1 
+        [/] sub sub task 2 
+        [?] sub sub task 3 
+        [/] sub sub task 4
+        [x] sub sub task 5 
+            [ ] sub sub sub task 1
+            [x] sub sub sub task 2
+
+    [x] sub task 3 
+        [ ] sub sub task 1 
+        [/] sub sub task 2 
+        [!] sub sub task 3 
+        [x] sub sub task 4
+
+    [?] sub task 4 
+        [x] sub sub task 1 
+        [/] sub sub task 2 
+        [!] sub sub task 3 
+        [ ] sub sub task 4
+
+    [!] sub task 5
+        [x] sub sub task 1 
+        [ ] sub sub task 2 
+        [!] sub sub task 3 
+        [!] sub sub task 4
+        [?] sub sub task 5

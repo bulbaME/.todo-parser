@@ -23,7 +23,7 @@ code, tab = None, None
 endline, line = 0, 0 
 flag1, flag2 = False, False
 
-def newState(state, newState):
+def newState(state = None, newState = None):
     if state == newState or (newState not in states.values()):
         return [state, False]
     # if [x]
@@ -72,9 +72,13 @@ def parsedPrint(task, state, level):
 
 def parseFile(fileName, f1, f2):
     global endline, line, code, tab, flag1, flag2
-    file = open(fileName, 'r')
-
-    print(f'{Fore.BLACK+Back.WHITE}{fileName.upper()} file:{Back.RESET+Style.RESET_ALL}\n│')
+    file = None
+    print(f'{Fore.BLACK+Back.WHITE}{fileName.upper()}{Back.RESET+Style.RESET_ALL}\n│')
+    try:
+        file = open(fileName, 'r')
+    except FileNotFoundError:
+        print(f'└{Fore.RED+Back.WHITE}not found.\n')
+        return
 
     code = file.readlines()
     flag1, flag2 = f1, f2
@@ -114,7 +118,7 @@ def parseFile(fileName, f1, f2):
             level += 1
 
         # check if line actually contains task
-        if line <= endline and code[line][level] == '[':
+        if line <= endline and code[line][level] == '[' and code[line][level+2] == ']' and code[line][level+1] in states.keys():
             task = True
             state = states[code[line][level + 1]]
 

@@ -2,7 +2,7 @@ import sys
 from parse import parser
 
 if __name__ == '__main__':
-    fileNames = [n for n in sys.argv if n[-6:] == '.todo']
+    fileNames = [n for n in sys.argv if n[-5:] == '.todo']
     ignoreFlag = True if '-i' in sys.argv else False
     planningFlag = True if '-p' in sys.argv else False
 

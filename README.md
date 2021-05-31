@@ -51,7 +51,7 @@ output example:
 ![output exmaple](https://media.discordapp.net/attachments/406868570333642752/848445068590448670/unknown.png?width=172&height=479)
 
 # USING
-command line: `py parser.py <filename>`
+command line: `py run.py <filename>`
 
 flags: 
 

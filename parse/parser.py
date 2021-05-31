@@ -44,6 +44,14 @@ def newState(state = None, newState = None):
             
 force = lambda s: s != 0 and s != 2
 
+def resetGlobals():
+    global endline, line, code, tab, flag1, flag2
+
+    code, tab = None, None
+    endline, line = 0, 0 
+    flag1, flag2 = False, False
+
+
 def parsedPrint(task, state, level):
     # ignore inactive task
     global endline, line
@@ -72,6 +80,10 @@ def parsedPrint(task, state, level):
 
 def parseFile(fileName, f1, f2):
     global endline, line, code, tab, flag1, flag2
+
+    # reset global variables
+    resetGlobals()
+
     file = None
     print(f'{Fore.BLACK+Back.WHITE}{fileName.upper()}{Back.RESET+Style.RESET_ALL}\n│')
     try:
@@ -138,3 +150,5 @@ def parseFile(fileName, f1, f2):
             parentLevel = level - 1
 
         parsedPrint(task, newState(parentStates[level], state) if task else [parentStates[level]], level)
+
+    print()

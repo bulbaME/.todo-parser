@@ -1,0 +1,8 @@
+[package]
+name = "todo_parser"
+version = "0.1.0"
+authors = ["bulba"]
+edition = "2018"
+
+[dependencies]
+termcolor = "*"

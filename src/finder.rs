@@ -1,8 +1,6 @@
 use std::fs;
 use std::path::PathBuf;
-use std::io::prelude::*;
 
-#[derive(Debug)]
 pub enum Error {
     UnnableToGetTodo,
     EmptyTodo,
@@ -31,7 +29,7 @@ fn get() -> Option<Vec<PathBuf>> {
     Some(entries)
 }
 
-pub fn find(name: Option<String>) -> Result<fs::File, Error> {
+pub fn find(name: Option<String>) -> Result<String, Error> {
     let entries = get().ok_or(Error::UnnableToGetTodo)?;
     if entries.len() == 0 {
         return Err(Error::EmptyTodo);
@@ -54,8 +52,5 @@ pub fn find(name: Option<String>) -> Result<fs::File, Error> {
         }
     };
 
-    match fs::File::open(path.to_str().ok_or(Error::UnnableToOpenFile)?) {
-        Ok(f) => Ok(f),
-        Err(_) => Err(Error::UnnableToOpenFile)
-    }
+    Ok(path.to_str().ok_or(Error::UnnableToOpenFile)?.to_owned())
 }

@@ -1,18 +1,8 @@
 use std::env;
+use super::Mark;
 
 pub type FileName = Option<String>;
 
-#[derive(Debug)]
-pub enum Mark {
-    Done,
-    Half,
-    Todo,
-    Ignored,
-    Developing,
-    None
-}
-
-#[derive(Debug)]
 pub enum Error {
     FileNotSpecified,
     EditFlagError(String),
@@ -20,10 +10,9 @@ pub enum Error {
     _CommandNotSpecified,
 }
 
-#[derive(Debug)]
 pub enum Command {
     Help,
-    Parse(FileName),
+    Parse(FileName, (bool, bool)),
     Error(Error),
     Edit(FileName, Mark, String)
 }
@@ -31,7 +20,7 @@ pub enum Command {
 pub fn init() -> Command {
     let args: Vec<String> = env::args().collect();
     if let None = args.get(1) {
-        return Command::Parse(None);
+        return Command::Parse(None, (false, false));
     }
 
     let mut file: FileName = None;
@@ -41,9 +30,11 @@ pub fn init() -> Command {
             "-h" => return Command::Help,
             "-c" => (),
             "-f" => (),
+            "-p" => (),
+            "-i" => (),
             s => {
                 if args.len() == 2 {
-                    return Command::Parse(Some(s.to_owned()));    
+                    return Command::Parse(Some(s.to_owned()), (false, false));    
                 } else {
                     file = Some(s.to_owned());
                 }
@@ -53,7 +44,17 @@ pub fn init() -> Command {
 
     let mut action: (Mark, String) = (Mark::None, String::new());
 
+    let mut display_i = false;
+    let mut display_p = false;
     for i in 1..args.len() {
+        if args[i] == "-i" {
+            display_i = true;
+        }
+
+        if args[i] == "-p" {
+            display_p = true;
+        }
+
         if args[i] == "-f" {
             if let Some(filename) = args.get(i+1) {
                 file = Some(filename.to_owned());
@@ -96,7 +97,7 @@ pub fn init() -> Command {
     }
 
     if let Mark::None = action.0 {
-        Command::Parse(file)
+        Command::Parse(file, (display_i, display_p))
     } else {
         Command::Edit(file, action.0, action.1)
     }

@@ -3,6 +3,7 @@ a rust program which parses '.todo' files for better readability. could be used 
 
 ![](https://media.discordapp.net/attachments/406868570333642752/975587897682055238/unknown.png)
 
-#### `todo -h`
+#### [download executable](./bin/todo.exe)
+#### `todo -h` for help
 #### TODO [file example](./TODO)
 sees either `TODO` files or `*.todo` 
